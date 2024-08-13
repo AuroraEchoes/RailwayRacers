@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2hyu0mtnurg3"]
+
+[ext_resource type="Script" path="res://scripts/ui/Credits.gd" id="1_p8781"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p8781")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.117647, 0.113725, 0.176471, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 256
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 256
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="CreditsText" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Art Assets[/b]
+Trains — [url=https://kenney.nl/assets/train-kit]Kenney[/url]
+Rails — AuroraEchoes
+Explosion Effect — [url=https://www.youtube.com/watch?v=tjSxICUXMmM]Gabriel Aguiar Prod.[/url]
+
+[b]Sound Assets[/b]
+Music — [url=https://www.cynicmusic.com/]cynicmusic[/url] (Alex Smith) via [url=https://opengameart.org/users/cynicmusic]OpenGameArt[/url]
+Train Cash Sound — [url=https://pixabay.com/sound-effects/cashier-quotka-chingquot-sound-effect-129698/]u_byub5wd934[/url] via Pixabay
+Explosion —  [url=https://pixabay.com/sound-effects/medium-explosion-40472/]Pixabay[/url]
+Train on Railway Loop — [url=https://pixabay.com/sound-effects/train-on-railway-loop-76468/]Pixabay[/url]
+
+[b]Code[/b]
+Godot Polyliner addon — [url=https://github.com/Firepal/godot-polyliner]Firepal[/url]
+All other code contributed by an increasingly unhinged AuroraEchoes
+
+[b]Playtesting[/b]
+whitefang2360
+
+[b]Other[/b]
+[url=https://github.com/godotengine/godot/]Godot Game Engine[/url] — Juan Linietsky, Ariel Manzur + 2,585 Contributors"
+fit_content = true
+
+[node name="BackToMainMenu" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"

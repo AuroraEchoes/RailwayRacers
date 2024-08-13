@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmlub6vugirrn"]
+
+[ext_resource type="Script" path="res://scripts/TrainCarriage.gd" id="1_1qw54"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8pi2"]
+size = Vector3(1, 1, 1.9)
+
+[node name="TrainCarriage" type="PathFollow3D"]
+loop = false
+script = ExtResource("1_1qw54")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.0499999)
+shape = SubResource("BoxShape3D_p8pi2")

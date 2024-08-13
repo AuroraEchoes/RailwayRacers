@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d22ipkg33irss"]
+
+[ext_resource type="Script" path="res://scripts/TrainSpawningPlatformScript.gd" id="1_t3bmb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4wn5d"]
+size = Vector3(2, 2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3bte"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1vl6"]
+size = Vector3(2.5, 3, 10)
+
+[node name="TrainSpawningPlatform" type="Node3D"]
+script = ExtResource("1_t3bmb")
+
+[node name="StationMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_4wn5d")
+surface_material_override/0 = SubResource("StandardMaterial3D_g3bte")
+
+[node name="Area3D" type="Area3D" parent="."]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 1, 0)
+shape = SubResource("BoxShape3D_s1vl6")
+
+[node name="TimeUntilNextSpawn" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.1, 2.18105, 0.1)
+text = "Next Train: KAJSND"
+font_size = 200
+outline_size = 48
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

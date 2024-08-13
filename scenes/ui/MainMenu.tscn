@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcqxjlb3eafqe"]
+
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_6x8py"]
+[ext_resource type="Texture2D" uid="uid://bgn1lgh20pg1p" path="res://assets/railwayracerstextlogo.png" id="1_84iqm"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6x8py")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.117647, 0.113725, 0.176471, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 384
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 384
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("1_84iqm")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="MenuButtons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer/MenuButtons"]
+layout_mode = 2
+text = "  Tutorial  "
+
+[node name="Levels" type="Button" parent="MarginContainer/VBoxContainer/MenuButtons"]
+layout_mode = 2
+text = "  Levels  "
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer/MenuButtons"]
+layout_mode = 2
+text = "  Settings  "
+
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/MenuButtons"]
+layout_mode = 2
+text = "  Credits  "
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/MenuButtons"]
+layout_mode = 2
+text = "  Quit  "

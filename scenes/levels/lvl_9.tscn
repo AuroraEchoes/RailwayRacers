@@ -1,0 +1,661 @@
+[gd_scene load_steps=96 format=3 uid="uid://bmrwfu21656q0"]
+
+[ext_resource type="PackedScene" uid="uid://y2cuqictrejx" path="res://scenes/ui/InGameUI.tscn" id="1_xl2wg"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="2_36e0r"]
+[ext_resource type="MeshLibrary" uid="uid://ddojayle08ccr" path="res://resources/RailMeshLib.tres" id="3_vicux"]
+[ext_resource type="Script" path="res://scripts/TrainGameboard.gd" id="4_on4r4"]
+[ext_resource type="Script" path="res://scripts/TrainPathRender.gd" id="5_u6s1s"]
+[ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/Line3D.gd" id="6_q21rx"]
+[ext_resource type="Shader" uid="uid://mddj3yvtsb0w" path="res://addons/godot-polyliner/shaders/line_arrow.tres" id="7_xbf2w"]
+[ext_resource type="AudioStream" uid="uid://btlgj1kutif8q" path="res://assets/sound/Soundtrack1.wav" id="8_mlqnr"]
+[ext_resource type="Script" path="res://scripts/ModeratedAudioPlayer.gd" id="9_mrfhv"]
+[ext_resource type="PackedScene" uid="uid://d22ipkg33irss" path="res://scenes/stations/TrainSpawningPlatform.tscn" id="10_npvcm"]
+[ext_resource type="Script" path="res://resources/TrainPokeball.gd" id="11_yxkyt"]
+[ext_resource type="PackedScene" uid="uid://bbuj32btb4quk" path="res://scenes/stations/YellowTrainStation.tscn" id="12_v3160"]
+[ext_resource type="PackedScene" uid="uid://cek6tshowv4oh" path="res://scenes/stations/BlueTrainStation.tscn" id="13_bvoac"]
+[ext_resource type="PackedScene" uid="uid://xx3durqkpaoc" path="res://scenes/stations/GreenTrainStation.tscn" id="14_xo8kf"]
+[ext_resource type="PackedScene" uid="uid://2xlte0ja4d70" path="res://scenes/stations/RedTrainStation.tscn" id="15_m2o2u"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sikvm"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk8it"]
+albedo_color = Color(0.0516015, 0.06371, 0.149888, 1)
+metallic = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ybwr"]
+render_priority = 0
+shader = ExtResource("7_xbf2w")
+shader_parameter/line_width = 0.235
+shader_parameter/color = Color(0.396123, 0.699525, 0.358886, 1)
+shader_parameter/stem_size = 0.3
+shader_parameter/peak_aspect = 0.1
+shader_parameter/double_sided = true
+shader_parameter/flip_direction = false
+
+[sub_resource type="Environment" id="Environment_u487u"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 2.0
+ssao_radius = 0.01
+ssao_intensity = 2.05
+ssil_enabled = true
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 0.18
+glow_strength = 1.05
+glow_blend_mode = 4
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wgewg"]
+dof_blur_far_distance = 50.0
+dof_blur_amount = 0.01
+
+[sub_resource type="Resource" id="Resource_ibv32"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_f4kto"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_8iets"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_414bt"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11])
+
+[sub_resource type="Resource" id="Resource_8fwou"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_gcyqf"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_du340"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 8, 0, 3])
+
+[sub_resource type="Resource" id="Resource_j5vro"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11])
+
+[sub_resource type="Resource" id="Resource_d5xtf"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_1fp1j"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8, 8])
+
+[sub_resource type="Resource" id="Resource_5e11g"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_wa8p8"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 4, 4, 2])
+
+[sub_resource type="Resource" id="Resource_wlyox"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_l8orb"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([6, 1, 6, 2])
+
+[sub_resource type="Resource" id="Resource_k64v8"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([3, 0, 4, 0])
+
+[sub_resource type="Resource" id="Resource_yvfn4"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_ajxnf"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_k3bec"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_8oj7b"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11])
+
+[sub_resource type="Resource" id="Resource_70hcl"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_b5fj5"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_i3x47"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10])
+
+[sub_resource type="Resource" id="Resource_kdykp"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_h1182"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 10])
+
+[sub_resource type="Resource" id="Resource_lumao"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_4fhxt"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_3nmnv"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_bpalj"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_6b4b0"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_luade"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11])
+
+[sub_resource type="Resource" id="Resource_x6krf"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_rnxqq"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_56q16"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_vbhu1"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_rccuv"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_h7ap5"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_sdm3b"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_evcrw"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_qw0xr"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_fvhgi"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_ym87l"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_jc24v"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_d61d6"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_b31kv"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_du326"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_f3hi4"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_l8w18"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 8, 3])
+
+[sub_resource type="Resource" id="Resource_wegsv"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_0m5q6"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_ns2na"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 6, 0, 6, 1])
+
+[sub_resource type="Resource" id="Resource_nh172"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_l1yqv"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 6, 0, 6])
+
+[sub_resource type="Resource" id="Resource_stiac"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_rupte"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 5, 5])
+
+[sub_resource type="Resource" id="Resource_g31x0"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([3, 3, 5, 0])
+
+[sub_resource type="Resource" id="Resource_hs2v3"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_nr83d"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_4ko4k"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_ufcon"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([4, 4, 1, 2, 1])
+
+[sub_resource type="Resource" id="Resource_lur8g"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_8olrm"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_g3d8g"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_nlav2"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11])
+
+[sub_resource type="Resource" id="Resource_3m53f"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_ods4j"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_o80i3"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_v0umt"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([3, 0, 0])
+
+[sub_resource type="Resource" id="Resource_ordm5"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([4, 4, 1])
+
+[sub_resource type="Resource" id="Resource_gfaoa"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_8jevq"]
+script = ExtResource("11_yxkyt")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9])
+
+[sub_resource type="Resource" id="Resource_2lxld"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 6, 1])
+
+[sub_resource type="Resource" id="Resource_iix3s"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11])
+
+[sub_resource type="Resource" id="Resource_j6w4m"]
+script = ExtResource("11_yxkyt")
+color = 3
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_3fqxm"]
+script = ExtResource("11_yxkyt")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_qtgl4"]
+script = ExtResource("11_yxkyt")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[node name="Level" type="Node3D"]
+
+[node name="UI" parent="." instance=ExtResource("1_xl2wg")]
+round_time = 150.0
+level_number = 9
+level_name = "The Future Urbanists Want"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 8, 6, 14)
+script = ExtResource("2_36e0r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.551282, 0.834319, 0, -0.834319, 0.551282, 0, 5.08889, 0)
+light_color = Color(0.770103, 0.755173, 0.746321, 1)
+light_energy = 2.709
+shadow_enabled = true
+sky_mode = 1
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("3_vicux")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 9
+data = {
+"cells": PackedInt32Array(1, 8, 0, 1, 7, 0, 1, 6, 0, 1, 5, 0, 1, 4, 0, 1, 3, 0, 1, 2, 0, 1, 1, 0, 1, 0, 0, 1, 65535, 0, 1, 65534, 0, 1, 65533, 0, 1, 65532, 0, 1, 65531, 8, 65533, 65534, 0, 65533, 65533, 0, 65533, 65532, 0, 65533, 65531, 4, 65534, 65531, 1, 65535, 65531, 1, 0, 65531, 1, 65533, 65535, 0, 65533, 0, 0, 65533, 1, 0, 65533, 2, 0, 65533, 3, 0, 65533, 4, 3, 65532, 4, 4, 65532, 5, 0, 1, 12, 0, 1, 11, 0, 1, 10, 0, 1, 9, 0, 7, 3, 0, 7, 4, 0, 7, 5, 0, 7, 6, 6, 7, 7, 0, 7, 12, 0, 7, 11, 0, 7, 10, 0, 7, 9, 0, 7, 8, 0, 7, 65531, 0, 7, 65532, 0, 7, 65533, 0, 7, 65534, 0, 7, 65535, 0, 7, 0, 0, 7, 2, 0, 7, 1, 0, 7, 13, 0, 7, 14, 0, 7, 15, 0, 7, 16, 0, 7, 17, 0, 1, 14, 0, 1, 15, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1, 19, 0, 1, 20, 0, 1, 21, 0, 7, 65530, 6, 7, 65529, 2, 6, 65529, 1, 5, 65529, 1, 4, 65529, 1, 3, 65529, 1, 2, 65531, 3, 2, 65530, 7, 2, 65529, 4, 1, 65530, 5, 1, 65529, 0, 1, 65528, 0, 1, 65527, 0, 1, 65526, 0, 1, 65521, 0, 1, 65522, 0, 1, 65523, 0, 1, 65524, 0, 1, 65525, 0, 1, 65520, 0, 1, 65519, 0, 8, 65522, 0, 8, 65521, 0, 8, 65520, 0, 8, 65519, 0, 8, 65518, 0, 8, 65517, 6, 8, 65516, 2, 7, 65516, 1, 6, 65516, 1, 5, 65516, 1, 4, 65516, 1, 3, 65516, 1, 2, 65516, 1, 1, 65517, 0, 1, 65518, 0, 1, 65516, 4, 8, 65530, 3, 8, 65529, 0, 8, 65528, 0, 8, 65527, 0, 8, 65526, 0, 8, 65525, 0, 8, 65524, 0, 8, 65523, 0, 9, 65517, 1, 17, 65528, 0, 17, 65527, 0, 17, 65526, 0, 17, 65525, 0, 17, 65524, 0, 17, 65523, 0, 17, 65522, 0, 17, 65520, 0, 17, 65519, 0, 17, 65518, 0, 17, 65521, 0, 14, 2, 0, 14, 1, 0, 14, 0, 0, 14, 65535, 0, 14, 65534, 0, 14, 65533, 0, 14, 65532, 0, 14, 65531, 0, 14, 65530, 4, 15, 65530, 1, 16, 65530, 1, 17, 65530, 3, 17, 65529, 0, 8, 6, 1, 9, 6, 1, 10, 6, 1, 11, 6, 1, 12, 6, 8, 13, 6, 1, 14, 6, 3, 14, 3, 0, 14, 4, 0, 14, 5, 0, 12, 9, 0, 12, 10, 0, 12, 11, 0, 12, 12, 0, 12, 15, 0, 12, 16, 0, 12, 17, 0, 12, 13, 0, 12, 14, 0, 12, 18, 0, 12, 19, 0, 12, 20, 0, 12, 21, 0, 12, 22, 0, 12, 23, 0, 12, 24, 0, 12, 25, 0, 12, 26, 0, 12, 27, 0, 12, 28, 0, 12, 29, 0, 12, 30, 0, 12, 31, 0, 12, 32, 0, 12, 33, 0, 12, 34, 0, 12, 35, 0, 12, 36, 0, 12, 37, 0, 12, 38, 0, 12, 39, 0, 12, 40, 0, 12, 41, 0, 12, 8, 0, 12, 7, 0, 17, 65517, 0, 17, 65516, 0, 17, 65515, 0, 17, 65514, 0, 17, 65513, 0, 17, 65512, 0, 17, 65511, 0, 17, 65510, 0, 17, 65509, 2, 10, 65517, 1, 11, 65517, 3, 11, 65516, 0, 11, 65515, 0, 11, 65514, 0, 11, 65513, 0, 11, 65512, 0, 11, 65511, 0, 11, 65510, 0, 11, 65509, 4, 12, 65509, 1, 13, 65509, 1, 14, 65509, 1, 15, 65509, 1, 16, 65509, 1, 1, 13, 0)
+}
+script = ExtResource("4_on4r4")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("PlaneMesh_sikvm")
+surface_material_override/0 = SubResource("StandardMaterial3D_jk8it")
+
+[node name="TrainPath" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("5_u6s1s")
+
+[node name="LineRenderer" type="Node3D" parent="TrainPath"]
+script = ExtResource("6_q21rx")
+material = SubResource("ShaderMaterial_6ybwr")
+points = PackedVector3Array()
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u487u")
+camera_attributes = SubResource("CameraAttributesPractical_wgewg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_mlqnr")
+autoplay = true
+script = ExtResource("9_mrfhv")
+sound_type = 1
+
+[node name="TrainSpawningPlatform" parent="." instance=ExtResource("10_npvcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 8)
+spawn_queue = Array[ExtResource("11_yxkyt")]([SubResource("Resource_ibv32"), SubResource("Resource_f4kto"), SubResource("Resource_8iets"), SubResource("Resource_414bt"), SubResource("Resource_8fwou"), SubResource("Resource_gcyqf"), SubResource("Resource_du340"), SubResource("Resource_j5vro"), SubResource("Resource_d5xtf"), SubResource("Resource_1fp1j"), SubResource("Resource_5e11g"), SubResource("Resource_wa8p8"), SubResource("Resource_wlyox"), SubResource("Resource_l8orb"), SubResource("Resource_k64v8")])
+
+[node name="TrainSpawningPlatform2" parent="." instance=ExtResource("10_npvcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -10)
+spawn_queue = Array[ExtResource("11_yxkyt")]([SubResource("Resource_yvfn4"), SubResource("Resource_ajxnf"), SubResource("Resource_k3bec"), SubResource("Resource_8oj7b"), SubResource("Resource_70hcl"), SubResource("Resource_b5fj5"), SubResource("Resource_i3x47"), SubResource("Resource_kdykp"), SubResource("Resource_h1182"), SubResource("Resource_lumao"), SubResource("Resource_4fhxt"), SubResource("Resource_3nmnv"), SubResource("Resource_bpalj"), SubResource("Resource_6b4b0"), SubResource("Resource_luade")])
+
+[node name="TrainSpawningPlatform3" parent="." instance=ExtResource("10_npvcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0.5)
+spawn_queue = Array[ExtResource("11_yxkyt")]([SubResource("Resource_x6krf"), SubResource("Resource_rnxqq"), SubResource("Resource_56q16"), SubResource("Resource_vbhu1"), SubResource("Resource_rccuv"), SubResource("Resource_h7ap5"), SubResource("Resource_sdm3b"), SubResource("Resource_evcrw"), SubResource("Resource_qw0xr"), SubResource("Resource_fvhgi"), SubResource("Resource_ym87l"), SubResource("Resource_jc24v"), SubResource("Resource_d61d6"), SubResource("Resource_b31kv"), SubResource("Resource_du326")])
+
+[node name="TrainSpawningPlatform4" parent="." instance=ExtResource("10_npvcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 14)
+spawn_queue = Array[ExtResource("11_yxkyt")]([SubResource("Resource_f3hi4"), SubResource("Resource_l8w18"), SubResource("Resource_wegsv"), SubResource("Resource_0m5q6"), SubResource("Resource_ns2na"), SubResource("Resource_nh172"), SubResource("Resource_l1yqv"), SubResource("Resource_stiac"), SubResource("Resource_rupte"), SubResource("Resource_g31x0"), SubResource("Resource_hs2v3"), SubResource("Resource_nr83d"), SubResource("Resource_4ko4k"), SubResource("Resource_ufcon"), SubResource("Resource_lur8g")])
+
+[node name="TrainSpawningPlatform5" parent="." instance=ExtResource("10_npvcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -17)
+spawn_queue = Array[ExtResource("11_yxkyt")]([SubResource("Resource_8olrm"), SubResource("Resource_g3d8g"), SubResource("Resource_nlav2"), SubResource("Resource_3m53f"), SubResource("Resource_ods4j"), SubResource("Resource_o80i3"), SubResource("Resource_v0umt"), SubResource("Resource_ordm5"), SubResource("Resource_gfaoa"), SubResource("Resource_8jevq"), SubResource("Resource_2lxld"), SubResource("Resource_iix3s"), SubResource("Resource_j6w4m"), SubResource("Resource_3fqxm"), SubResource("Resource_qtgl4")])
+
+[node name="TrainStation" parent="." instance=ExtResource("12_v3160")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 12.5)
+
+[node name="TrainStation2" parent="." instance=ExtResource("13_bvoac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1)
+
+[node name="TrainStation3" parent="." instance=ExtResource("14_xo8kf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="TrainStation4" parent="." instance=ExtResource("15_m2o2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13)

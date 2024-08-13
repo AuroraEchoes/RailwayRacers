@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d0gpvh6agj3hi"]
+
+[ext_resource type="Shader" path="res://resources/train_highlight.gdshader" id="1_htpan"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_htpan")
+shader_parameter/enabled = false
+shader_parameter/pulse_time = 3.0
+shader_parameter/highlight_color = Color(0.2, 0.8, 0.2, 1)

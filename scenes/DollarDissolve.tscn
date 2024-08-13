@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://c432vmn72swj1"]
+
+[ext_resource type="Texture2D" uid="uid://bk00hqxbru8ow" path="res://assets/explosion/dollar.png" id="1_govu5"]
+[ext_resource type="Script" path="res://scripts/DollarDissolve.gd" id="1_pl52d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihu1a"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_govu5")
+
+[sub_resource type="Curve" id="Curve_spyyy"]
+_data = [Vector2(0.0224215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.384615), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_65sib"]
+curve = SubResource("Curve_spyyy")
+
+[sub_resource type="Gradient" id="Gradient_j2kt8"]
+colors = PackedColorArray(0.252028, 0.252028, 0.252028, 1, 0.627451, 0.627451, 0.627451, 0.576471)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xnnam"]
+gradient = SubResource("Gradient_j2kt8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p0tyl"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 0.25
+angle_max = 180.0
+spread = 180.0
+flatness = 0.25
+initial_velocity_min = 5.0
+initial_velocity_max = 25.0
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0, 0.737255, 0, 1)
+color_ramp = SubResource("GradientTexture1D_xnnam")
+alpha_curve = SubResource("CurveTexture_65sib")
+turbulence_noise_scale = 4.814
+
+[sub_resource type="QuadMesh" id="QuadMesh_s5j84"]
+
+[node name="DollarDissolve" type="Node3D"]
+script = ExtResource("1_pl52d")
+
+[node name="Dollars" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ihu1a")
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.36
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_p0tyl")
+draw_pass_1 = SubResource("QuadMesh_s5j84")

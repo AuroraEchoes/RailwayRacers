@@ -1,0 +1,288 @@
+[gd_scene load_steps=43 format=3 uid="uid://d1cip3057g8x8"]
+
+[ext_resource type="PackedScene" uid="uid://y2cuqictrejx" path="res://scenes/ui/InGameUI.tscn" id="1_akeia"]
+[ext_resource type="MeshLibrary" uid="uid://ddojayle08ccr" path="res://resources/RailMeshLib.tres" id="2_40dma"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="2_xif3c"]
+[ext_resource type="Script" path="res://scripts/TrainGameboard.gd" id="3_q3f8a"]
+[ext_resource type="Script" path="res://scripts/TrainPathRender.gd" id="4_iyen3"]
+[ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/Line3D.gd" id="5_763t4"]
+[ext_resource type="Shader" uid="uid://mddj3yvtsb0w" path="res://addons/godot-polyliner/shaders/line_arrow.tres" id="6_q1n48"]
+[ext_resource type="PackedScene" uid="uid://cek6tshowv4oh" path="res://scenes/stations/BlueTrainStation.tscn" id="9_c33iu"]
+[ext_resource type="PackedScene" uid="uid://2xlte0ja4d70" path="res://scenes/stations/RedTrainStation.tscn" id="10_q1mrm"]
+[ext_resource type="PackedScene" uid="uid://xx3durqkpaoc" path="res://scenes/stations/GreenTrainStation.tscn" id="12_63qtp"]
+[ext_resource type="PackedScene" uid="uid://bbuj32btb4quk" path="res://scenes/stations/YellowTrainStation.tscn" id="12_ywnnn"]
+[ext_resource type="PackedScene" uid="uid://d22ipkg33irss" path="res://scenes/stations/TrainSpawningPlatform.tscn" id="13_d5yb7"]
+[ext_resource type="Script" path="res://resources/TrainPokeball.gd" id="14_ex8o0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ndcug"]
+size = Vector2(256, 256)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncl31"]
+albedo_color = Color(0.0516015, 0.06371, 0.149888, 1)
+metallic = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8eyyb"]
+render_priority = 0
+shader = ExtResource("6_q1n48")
+shader_parameter/line_width = 0.235
+shader_parameter/color = Color(0.396123, 0.699525, 0.358886, 1)
+shader_parameter/stem_size = 0.3
+shader_parameter/peak_aspect = 0.1
+shader_parameter/double_sided = true
+shader_parameter/flip_direction = false
+
+[sub_resource type="Environment" id="Environment_ovdp0"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 2.0
+ssao_radius = 0.01
+ssao_intensity = 2.05
+ssil_enabled = true
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 0.18
+glow_strength = 1.05
+glow_blend_mode = 4
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_s3kxw"]
+dof_blur_far_distance = 50.0
+dof_blur_amount = 0.01
+
+[sub_resource type="Resource" id="Resource_h517k"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 3, 5, 5])
+
+[sub_resource type="Resource" id="Resource_bmxjo"]
+script = ExtResource("14_ex8o0")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_6etld"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_5rlp7"]
+script = ExtResource("14_ex8o0")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 4, 4, 0, 2])
+
+[sub_resource type="Resource" id="Resource_6ueo7"]
+script = ExtResource("14_ex8o0")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_jn78d"]
+script = ExtResource("14_ex8o0")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 9, 9])
+
+[sub_resource type="Resource" id="Resource_p2xcd"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([5, 5, 8, 3, 3])
+
+[sub_resource type="Resource" id="Resource_q7t7p"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_wpl85"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 10, 11, 11])
+
+[sub_resource type="Resource" id="Resource_5mvev"]
+script = ExtResource("14_ex8o0")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 6, 6, 1, 1])
+
+[sub_resource type="Resource" id="Resource_qbxnf"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8])
+
+[sub_resource type="Resource" id="Resource_att4o"]
+script = ExtResource("14_ex8o0")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_5lesw"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_4jlxq"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_dtp5k"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_gpjiv"]
+script = ExtResource("14_ex8o0")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9])
+
+[sub_resource type="Resource" id="Resource_c704f"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_hi10x"]
+script = ExtResource("14_ex8o0")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 1, 1, 4, 4])
+
+[sub_resource type="Resource" id="Resource_34blv"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([5, 5, 3, 5])
+
+[sub_resource type="Resource" id="Resource_j6l8g"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_x2ayk"]
+script = ExtResource("14_ex8o0")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9])
+
+[sub_resource type="Resource" id="Resource_klju6"]
+script = ExtResource("14_ex8o0")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_kkei7"]
+script = ExtResource("14_ex8o0")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_0sflr"]
+script = ExtResource("14_ex8o0")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([3, 1, 1, 3, 0])
+
+[node name="Level" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -2.5, 20.7729, 27.5346)
+script = ExtResource("2_xif3c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.551282, 0.834319, 0, -0.834319, 0.551282, 0, 5.08889, 0)
+light_color = Color(0.770103, 0.755173, 0.746321, 1)
+light_energy = 2.709
+shadow_enabled = true
+sky_mode = 1
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_40dma")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 9
+data = {
+"cells": PackedInt32Array(-5505024, 105, 1441793, -2555904, 50, 1441793, -1638400, 33, 1441793, -1245184, 27, 1441793, -1114112, 24, 1441793, -1048576, 23, 1441793, -1048576, 22, 1441793, -983040, 22, 1441793, -1114112, 23, 1441793, -1179648, 24, 1441793, -1179648, 25, 1441793, -1245184, 25, 1441793, -1245184, 26, 1441793, -1310720, 27, 1441793, -1441792, 28, 1441793, -1507328, 30, 1441793, -1572864, 31, 1441793, -1638400, 32, 1441793, 65533, 32, 0, 65533, 33, 0, 65533, 34, 0, 65533, 31, 0, 65533, 30, 0, 65533, 29, 0, 65533, 28, 0, 65533, 27, 0, 65533, 26, 0, 65533, 25, 0, 65533, 24, 0, 65533, 23, 0, 65533, 22, 0, 65533, 35, 0, 65533, 36, 0, 65533, 37, 0, 65533, 38, 0, 65533, 39, 0, 65533, 40, 0, 65533, 41, 0, 65533, 42, 0, 65533, 43, 0, 65533, 44, 0, 65533, 45, 0, 65533, 46, 0, 65533, 47, 0, 65533, 48, 0, 65533, 49, 0, 65533, 50, 0, 65533, 51, 0, 65533, 52, 0, 65533, 53, 0, 5, 21, 0, 5, 22, 0, 5, 23, 0, 5, 24, 0, 5, 25, 0, 5, 26, 0, 5, 27, 0, 5, 28, 0, 5, 29, 0, 5, 30, 0, 5, 31, 0, 5, 32, 0, 5, 33, 0, 5, 34, 0, 5, 35, 0, 5, 36, 0, 5, 37, 0, 5, 38, 0, 5, 39, 0, 5, 40, 0, 5, 41, 0, 5, 42, 0, 5, 43, 0, 5, 44, 0, 5, 45, 0, 5, 46, 0, 5, 47, 0, 5, 48, 0, 5, 49, 0, 5, 50, 0, 5, 51, 0, 5, 52, 0, 5, 53, 0, 65525, 29, 0, 65525, 30, 0, 65525, 31, 0, 65525, 32, 0, 65525, 33, 0, 65525, 28, 0, 65525, 27, 0, 65525, 26, 0, 65525, 25, 0, 65525, 24, 0, 65525, 23, 0, 65525, 22, 0, 65525, 21, 0, 65525, 34, 0, 65525, 35, 0, 65525, 36, 0, 65525, 37, 0, 65525, 38, 0, 65525, 39, 0, 65525, 40, 0, 65525, 41, 0, 65525, 42, 0, 65525, 43, 0, 65525, 44, 0, 65525, 45, 0, 65525, 46, 0, 65525, 47, 0, 65525, 48, 0, 65525, 49, 0, 65525, 50, 0, 65525, 51, 0, 65525, 52, 0, 65525, 53, 0, 65525, 20, 4, 5, 20, 8, 65526, 20, 1, 65527, 20, 1, 65528, 20, 1, 65529, 20, 1, 65530, 20, 1, 65531, 20, 1, 65535, 20, 1, 0, 20, 1, 1, 20, 1, 2, 20, 1, 3, 20, 1, 4, 20, 1, 65532, 20, 1, 65533, 20, 8, 65534, 20, 1, 6, 20, 1, 7, 20, 1, 65533, 21, 0, 8, 20, 3, 8, 19, 0, 8, 18, 0, 8, 17, 0, 8, 16, 0, 8, 15, 0, 8, 14, 0, 8, 13, 0, 8, 12, 0, 8, 11, 0, 8, 10, 0, 8, 0, 0, 8, 1, 0, 8, 2, 0, 8, 3, 0, 8, 4, 0, 8, 5, 0, 8, 6, 0, 8, 7, 0, 8, 8, 0, 8, 9, 0, 8, 65535, 0, 8, 65534, 0, 8, 65533, 0, 8, 65532, 0, 8, 65531, 2, 7, 65531, 1, 6, 65531, 1, 5, 65531, 1, 4, 65531, 1, 3, 65531, 1, 2, 65531, 1, 1, 65531, 1, 0, 65531, 1, 65535, 65531, 4, 65535, 65532, 0, 65535, 65533, 0, 65535, 65534, 0, 65535, 65535, 0, 65535, 0, 0, 65535, 1, 0, 65535, 2, 0, 65535, 3, 0, 65535, 4, 0, 65535, 5, 0, 65535, 6, 0, 65535, 7, 0, 65535, 8, 0, 65535, 9, 0, 65535, 10, 0, 65535, 11, 0, 65535, 12, 0, 65535, 13, 0, 65535, 14, 0, 65535, 15, 0, 65535, 16, 0, 65535, 17, 0, 65535, 18, 0)
+}
+script = ExtResource("3_q3f8a")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("PlaneMesh_ndcug")
+surface_material_override/0 = SubResource("StandardMaterial3D_ncl31")
+
+[node name="TrainPath" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("4_iyen3")
+
+[node name="LineRenderer" type="Node3D" parent="TrainPath"]
+script = ExtResource("5_763t4")
+material = SubResource("ShaderMaterial_8eyyb")
+points = PackedVector3Array()
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ovdp0")
+camera_attributes = SubResource("CameraAttributesPractical_s3kxw")
+
+[node name="UI" parent="." instance=ExtResource("1_akeia")]
+round_time = 60.0
+level_number = 4
+level_name = "End of the Line!"
+
+[node name="TrainSpawningPlatform" parent="." instance=ExtResource("13_d5yb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 29)
+spawn_queue = Array[ExtResource("14_ex8o0")]([SubResource("Resource_h517k"), SubResource("Resource_bmxjo"), SubResource("Resource_6etld"), SubResource("Resource_5rlp7"), SubResource("Resource_6ueo7"), SubResource("Resource_jn78d"), SubResource("Resource_p2xcd"), SubResource("Resource_q7t7p")])
+
+[node name="TrainSpawningPlatform2" parent="." instance=ExtResource("13_d5yb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 29)
+spawn_queue = Array[ExtResource("14_ex8o0")]([SubResource("Resource_wpl85"), SubResource("Resource_5mvev"), SubResource("Resource_qbxnf"), SubResource("Resource_att4o"), SubResource("Resource_5lesw"), SubResource("Resource_4jlxq"), SubResource("Resource_dtp5k"), SubResource("Resource_gpjiv")])
+
+[node name="TrainSpawningPlatform3" parent="." instance=ExtResource("13_d5yb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0, 29)
+spawn_queue = Array[ExtResource("14_ex8o0")]([SubResource("Resource_c704f"), SubResource("Resource_hi10x"), SubResource("Resource_34blv"), SubResource("Resource_j6l8g"), SubResource("Resource_x2ayk"), SubResource("Resource_klju6"), SubResource("Resource_kkei7"), SubResource("Resource_0sflr")])
+
+[node name="TrainStation" parent="." instance=ExtResource("12_ywnnn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 15)
+
+[node name="TrainStation2" parent="." instance=ExtResource("10_q1mrm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+
+[node name="TrainStation3" parent="." instance=ExtResource("12_63qtp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 3)
+
+[node name="TrainStation4" parent="." instance=ExtResource("9_c33iu")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2, 0, 15)

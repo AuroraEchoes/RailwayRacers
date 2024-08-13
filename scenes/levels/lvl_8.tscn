@@ -1,0 +1,572 @@
+[gd_scene load_steps=83 format=3 uid="uid://dnbf8w5wolo1"]
+
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="1_8y2f5"]
+[ext_resource type="MeshLibrary" uid="uid://ddojayle08ccr" path="res://resources/RailMeshLib.tres" id="2_sybrq"]
+[ext_resource type="Script" path="res://scripts/TrainGameboard.gd" id="3_j57tx"]
+[ext_resource type="Script" path="res://scripts/TrainPathRender.gd" id="4_rnb2o"]
+[ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/Line3D.gd" id="5_7aqay"]
+[ext_resource type="Shader" uid="uid://mddj3yvtsb0w" path="res://addons/godot-polyliner/shaders/line_arrow.tres" id="6_c0dtf"]
+[ext_resource type="PackedScene" uid="uid://bbuj32btb4quk" path="res://scenes/stations/YellowTrainStation.tscn" id="7_agig0"]
+[ext_resource type="PackedScene" uid="uid://2xlte0ja4d70" path="res://scenes/stations/RedTrainStation.tscn" id="8_vkkts"]
+[ext_resource type="PackedScene" uid="uid://cek6tshowv4oh" path="res://scenes/stations/BlueTrainStation.tscn" id="9_04n8r"]
+[ext_resource type="PackedScene" uid="uid://d22ipkg33irss" path="res://scenes/stations/TrainSpawningPlatform.tscn" id="10_m752v"]
+[ext_resource type="Script" path="res://resources/TrainPokeball.gd" id="11_e2jj7"]
+[ext_resource type="PackedScene" uid="uid://xx3durqkpaoc" path="res://scenes/stations/GreenTrainStation.tscn" id="12_p73rs"]
+[ext_resource type="PackedScene" uid="uid://y2cuqictrejx" path="res://scenes/ui/InGameUI.tscn" id="12_svwpx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ndcug"]
+size = Vector2(256, 256)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncl31"]
+albedo_color = Color(0.0516015, 0.06371, 0.149888, 1)
+metallic = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8eyyb"]
+render_priority = 0
+shader = ExtResource("6_c0dtf")
+shader_parameter/line_width = 0.235
+shader_parameter/color = Color(0.396123, 0.699525, 0.358886, 1)
+shader_parameter/stem_size = 0.3
+shader_parameter/peak_aspect = 0.1
+shader_parameter/double_sided = true
+shader_parameter/flip_direction = false
+
+[sub_resource type="Environment" id="Environment_ovdp0"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 2.0
+ssao_radius = 0.01
+ssao_intensity = 2.05
+ssil_enabled = true
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 0.18
+glow_strength = 1.05
+glow_blend_mode = 4
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_s3kxw"]
+dof_blur_far_distance = 50.0
+dof_blur_amount = 0.01
+
+[sub_resource type="Resource" id="Resource_n0nxh"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_g647b"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 7, 7, 1, 1])
+
+[sub_resource type="Resource" id="Resource_1vf8s"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8, 8, 8, 8, 8])
+
+[sub_resource type="Resource" id="Resource_3d5pk"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10])
+
+[sub_resource type="Resource" id="Resource_qokpr"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_lqx3x"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_yctdo"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 0, 0, 0, 0, 0, 0])
+
+[sub_resource type="Resource" id="Resource_m5cg5"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_n06y7"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_2vu86"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_74mbk"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8, 8])
+
+[sub_resource type="Resource" id="Resource_7ory2"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([2, 0, 0, 1, 1, 6, 2])
+
+[sub_resource type="Resource" id="Resource_hok1m"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_ru4jc"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_8nlc3"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_1alu7"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_0jhrd"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 0, 6, 6, 6, 6, 6])
+
+[sub_resource type="Resource" id="Resource_e774c"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 1, 4, 2, 0, 4])
+
+[sub_resource type="Resource" id="Resource_ud2m2"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_gfbaw"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([1, 1, 1, 1, 1])
+
+[sub_resource type="Resource" id="Resource_c75ew"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_0opvc"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_d0k5o"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 2, 1, 2, 0])
+
+[sub_resource type="Resource" id="Resource_v0tv1"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10, 9, 10])
+
+[sub_resource type="Resource" id="Resource_7ykl7"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_fp4k4"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_0y7tn"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_skh5x"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 0, 6, 6])
+
+[sub_resource type="Resource" id="Resource_tty3t"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([5, 5, 6, 5])
+
+[sub_resource type="Resource" id="Resource_e1yy7"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_wcnyd"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_morgs"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([1, 0, 0, 10, 0])
+
+[sub_resource type="Resource" id="Resource_bvrtd"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8, 8, 8, 8, 8, 8])
+
+[sub_resource type="Resource" id="Resource_wt74t"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([1, 0, 2, 2, 4, 4])
+
+[sub_resource type="Resource" id="Resource_51wgh"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_h5ulb"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([6, 6, 6, 2, 2])
+
+[sub_resource type="Resource" id="Resource_a3bgl"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8, 8, 8])
+
+[sub_resource type="Resource" id="Resource_f8dqu"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_sovr6"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_sg16c"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_25dh5"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 5, 3, 0, 0])
+
+[sub_resource type="Resource" id="Resource_youtu"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_stx51"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_xd74t"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_hynxo"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_vs5eg"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([1, 1, 7, 0, 7, 7, 7, 0])
+
+[sub_resource type="Resource" id="Resource_nxq7q"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_jal35"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_43jkh"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 6, 6, 0, 0, 1, 1, 6])
+
+[sub_resource type="Resource" id="Resource_nlwr2"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_gf6tb"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([9, 9, 9, 9])
+
+[sub_resource type="Resource" id="Resource_dq5dy"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([3, 3, 8, 2, 1, 3, 0])
+
+[sub_resource type="Resource" id="Resource_omgmr"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_pcvxc"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 1, 1, 7, 7, 7, 0])
+
+[sub_resource type="Resource" id="Resource_xsd54"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_tqi56"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([8, 8, 8, 8, 8, 8, 8, 8])
+
+[sub_resource type="Resource" id="Resource_xbt2i"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([0, 0, 6, 6, 1, 0])
+
+[sub_resource type="Resource" id="Resource_2gqay"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 10, 11, 11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_fuejw"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([1, 4, 0, 4, 0, 1])
+
+[sub_resource type="Resource" id="Resource_vpkpo"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_pus80"]
+script = ExtResource("11_e2jj7")
+color = 1
+type = 1
+spawn_delay = 1.0
+carriages = Array[int]([10, 10, 10, 10])
+
+[sub_resource type="Resource" id="Resource_mmnmv"]
+script = ExtResource("11_e2jj7")
+color = 3
+type = 0
+spawn_delay = 1.0
+carriages = Array[int]([11, 11, 11, 11])
+
+[sub_resource type="Resource" id="Resource_opfx5"]
+script = ExtResource("11_e2jj7")
+color = 2
+type = 2
+spawn_delay = 1.0
+carriages = Array[int]([4, 4, 0, 0, 1, 0, 1])
+
+[sub_resource type="Resource" id="Resource_7fbb8"]
+script = ExtResource("11_e2jj7")
+color = 0
+type = 3
+spawn_delay = 1.0
+carriages = Array[int]([])
+
+[node name="Level" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -2.5, 20.7729, 27.5346)
+script = ExtResource("1_8y2f5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.551282, 0.834319, 0, -0.834319, 0.551282, 0, 5.08889, 0)
+light_color = Color(0.770103, 0.755173, 0.746321, 1)
+light_energy = 2.709
+shadow_enabled = true
+sky_mode = 1
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_sybrq")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 9
+data = {
+"cells": PackedInt32Array(-5505024, 105, 1441793, -2555904, 50, 1441793, -1638400, 33, 1441793, -1245184, 27, 1441793, -1114112, 24, 1441793, -1048576, 23, 1441793, -1048576, 22, 1441793, -983040, 22, 1441793, -1114112, 23, 1441793, -1179648, 24, 1441793, -1179648, 25, 1441793, -1245184, 25, 1441793, -1245184, 26, 1441793, -1310720, 27, 1441793, -1441792, 28, 1441793, -1507328, 30, 1441793, -1572864, 31, 1441793, -1638400, 32, 1441793, 65525, 21, 1, 4, 20, 2, 3, 20, 1, 2, 20, 5, 65535, 20, 9, 65534, 20, 8, 65533, 20, 8, 65532, 21, 1, 65531, 21, 1, 65530, 21, 1, 65529, 21, 1, 65528, 21, 8, 65527, 21, 1, 65526, 21, 1, 65524, 20, 8, 65525, 20, 1, 65526, 20, 3, 65532, 20, 5, 65532, 19, 7, 65532, 18, 7, 65532, 17, 7, 65526, 19, 4, 65527, 19, 1, 65528, 19, 9, 65529, 19, 1, 65530, 19, 1, 65531, 19, 9, 65523, 20, 6, 65523, 19, 0, 65523, 18, 0, 65523, 17, 6, 65523, 16, 4, 65524, 17, 1, 65525, 17, 1, 65526, 17, 9, 65527, 17, 1, 65528, 18, 0, 65528, 17, 8, 65524, 16, 1, 65525, 16, 3, 65525, 15, 4, 65526, 15, 2, 65526, 16, 6, 65529, 17, 9, 65530, 17, 2, 65530, 18, 5, 65531, 18, 8, 65532, 16, 4, 65533, 16, 9, 65535, 19, 0, 65535, 18, 6, 65535, 17, 2, 65534, 16, 2, 65534, 17, 5, 65529, 16, 0, 65529, 15, 6, 65533, 15, 0, 65533, 14, 2, 65532, 14, 1, 65531, 14, 9, 65530, 14, 9, 65529, 14, 4, 65527, 16, 3, 65527, 15, 0, 65527, 14, 7, 65527, 13, 4, 65530, 13, 2, 65528, 13, 9, 65529, 13, 1, 2, 19, 0, 2, 18, 2, 0, 18, 1, 1, 18, 8, 1, 19, 3, 0, 19, 4, 0, 20, 3, 65525, 6, 0, 65525, 7, 0, 65525, 8, 0, 65525, 9, 0, 65525, 10, 0, 65525, 11, 0, 65525, 12, 0, 65525, 13, 0, 65525, 14, 5, 65526, 14, 1, 65528, 12, 4, 65529, 12, 3, 65529, 11, 7, 65529, 10, 0, 65529, 9, 8, 65528, 11, 1, 65527, 11, 5, 65527, 10, 0, 65527, 9, 4, 65528, 9, 1, 65530, 9, 1, 65531, 8, 7, 65531, 9, 3, 65530, 8, 5, 65530, 7, 0, 65530, 6, 0, 65530, 5, 0, 65530, 4, 0, 65530, 3, 0, 65530, 2, 0, 65530, 1, 0, 65530, 0, 0, 65530, 65535, 0, 65531, 7, 4, 65532, 7, 1, 65533, 7, 1, 65534, 7, 1, 65535, 7, 1, 0, 7, 1, 1, 7, 1, 2, 7, 1, 3, 7, 1, 4, 7, 1, 5, 7, 1, 6, 7, 1, 65531, 13, 4, 65532, 13, 1, 65533, 13, 1, 65534, 13, 1, 65535, 13, 1, 0, 13, 1, 1, 13, 1, 2, 13, 1, 65524, 21, 5, 65522, 22, 0, 65522, 23, 0, 65522, 24, 0, 65522, 25, 0, 65522, 26, 0, 65522, 27, 0, 65522, 28, 0, 65522, 29, 0, 65522, 30, 0, 65522, 31, 0, 65522, 32, 0, 65528, 32, 0, 65528, 31, 0, 65528, 30, 0, 65528, 29, 0, 65528, 28, 0, 65528, 27, 0, 65528, 22, 0, 65528, 23, 0, 65528, 24, 0, 65528, 25, 0, 65528, 26, 0, 65534, 23, 0, 65534, 24, 0, 65534, 25, 0, 65534, 26, 0, 65534, 27, 0, 65534, 28, 0, 65534, 29, 0, 65534, 30, 0, 65534, 31, 0, 65534, 32, 0, 65534, 22, 0, 65533, 21, 3, 65534, 21, 0, 65522, 21, 4, 65523, 21, 3, 4, 21, 0, 4, 22, 0, 4, 23, 0, 4, 24, 0, 4, 25, 0, 4, 26, 0, 4, 27, 0, 4, 32, 0, 4, 31, 0, 4, 30, 0, 4, 29, 0, 4, 28, 0, 65522, 33, 0, 65522, 34, 0, 65522, 35, 0, 65522, 36, 0, 65522, 37, 0, 65522, 38, 0, 65522, 39, 0, 65522, 40, 0, 65522, 41, 0, 65522, 42, 0, 65522, 43, 0, 65522, 44, 0, 65522, 45, 0, 65522, 46, 0, 65522, 47, 0, 65528, 33, 0, 65528, 34, 0, 65528, 35, 0, 65528, 36, 0, 65528, 37, 0, 65528, 38, 0, 65528, 39, 0, 65528, 40, 0, 65528, 41, 0, 65528, 42, 0, 65528, 43, 0, 65528, 44, 0, 65528, 45, 0, 65528, 46, 0, 65528, 47, 0, 65534, 33, 0, 65534, 34, 0, 65534, 35, 0, 65534, 36, 0, 65534, 37, 0, 65534, 38, 0, 65534, 39, 0, 65534, 40, 0, 65534, 41, 0, 65534, 42, 0, 65534, 43, 0, 65534, 44, 0, 65534, 45, 0, 65534, 46, 0, 65534, 47, 0, 4, 33, 0, 4, 34, 0, 4, 35, 0, 4, 36, 0, 4, 37, 0, 4, 38, 0, 4, 39, 0, 4, 40, 0, 4, 41, 0, 4, 42, 0, 4, 43, 0, 4, 44, 0, 4, 45, 0, 4, 46, 0, 4, 47, 0, 65525, 22, 1, 65531, 17, 5, 65531, 16, 0, 65530, 15, 1, 65531, 15, 2, 7, 4, 2, 4, 48, 0, 4, 49, 0, 4, 50, 0, 4, 51, 0, 4, 52, 0, 4, 53, 0, 4, 54, 0, 4, 55, 0, 4, 56, 0, 4, 57, 0, 4, 58, 0, 4, 59, 0, 4, 60, 0, 4, 61, 0, 4, 62, 0, 65534, 48, 0, 65534, 49, 0, 65534, 50, 0, 65534, 51, 0, 65534, 52, 0, 65534, 53, 0, 65534, 54, 0, 65534, 55, 0, 65534, 56, 0, 65534, 57, 0, 65534, 58, 0, 65534, 62, 0, 65534, 61, 0, 65534, 60, 0, 65534, 59, 0, 65528, 48, 0, 65528, 49, 0, 65528, 50, 0, 65528, 51, 0, 65528, 52, 0, 65528, 53, 0, 65528, 61, 0, 65528, 60, 0, 65528, 59, 0, 65528, 58, 0, 65528, 57, 0, 65528, 56, 0, 65528, 55, 0, 65528, 54, 0, 65528, 62, 0, 65522, 48, 0, 65522, 49, 0, 65522, 50, 0, 65522, 51, 0, 65522, 52, 0, 65522, 53, 0, 65522, 62, 0, 65522, 61, 0, 65522, 60, 0, 65522, 59, 0, 65522, 58, 0, 65522, 57, 0, 65522, 56, 0, 65522, 55, 0, 65522, 54, 0)
+}
+script = ExtResource("3_j57tx")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("PlaneMesh_ndcug")
+surface_material_override/0 = SubResource("StandardMaterial3D_ncl31")
+
+[node name="TrainPath" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("4_rnb2o")
+
+[node name="LineRenderer" type="Node3D" parent="TrainPath"]
+script = ExtResource("5_7aqay")
+material = SubResource("ShaderMaterial_8eyyb")
+points = PackedVector3Array()
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ovdp0")
+camera_attributes = SubResource("CameraAttributesPractical_s3kxw")
+
+[node name="UI" parent="." instance=ExtResource("12_svwpx")]
+round_time = 120.0
+level_number = 8
+level_name = "Bit of a maze? (Or, let’s give this pathfinding a workout)"
+
+[node name="TrainStation" parent="." instance=ExtResource("8_vkkts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 11)
+
+[node name="TrainStation2" parent="." instance=ExtResource("7_agig0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, 12)
+
+[node name="TrainStation3" parent="." instance=ExtResource("12_p73rs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 3)
+
+[node name="TrainStation4" parent="." instance=ExtResource("9_04n8r")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.04747, 0, 6.00507)
+
+[node name="TrainSpawningPlatform" parent="." instance=ExtResource("10_m752v")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.5, 0, 28)
+spawn_queue = Array[ExtResource("11_e2jj7")]([SubResource("Resource_n0nxh"), SubResource("Resource_g647b"), SubResource("Resource_1vf8s"), SubResource("Resource_3d5pk"), SubResource("Resource_qokpr"), SubResource("Resource_lqx3x"), SubResource("Resource_yctdo"), SubResource("Resource_m5cg5"), SubResource("Resource_n06y7"), SubResource("Resource_2vu86"), SubResource("Resource_74mbk"), SubResource("Resource_7ory2"), SubResource("Resource_hok1m"), SubResource("Resource_ru4jc"), SubResource("Resource_8nlc3"), SubResource("Resource_1alu7")])
+
+[node name="TrainSpawningPlatform2" parent="." instance=ExtResource("10_m752v")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.4537, 0.0336895, 27.9231)
+spawn_queue = Array[ExtResource("11_e2jj7")]([SubResource("Resource_0jhrd"), SubResource("Resource_e774c"), SubResource("Resource_ud2m2"), SubResource("Resource_gfbaw"), SubResource("Resource_c75ew"), SubResource("Resource_0opvc"), SubResource("Resource_d0k5o"), SubResource("Resource_v0tv1"), SubResource("Resource_7ykl7"), SubResource("Resource_fp4k4"), SubResource("Resource_0y7tn"), SubResource("Resource_skh5x"), SubResource("Resource_tty3t"), SubResource("Resource_e1yy7"), SubResource("Resource_wcnyd"), SubResource("Resource_morgs")])
+
+[node name="TrainSpawningPlatform3" parent="." instance=ExtResource("10_m752v")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.546301, 0.0336895, 27.9231)
+spawn_queue = Array[ExtResource("11_e2jj7")]([SubResource("Resource_bvrtd"), SubResource("Resource_wt74t"), SubResource("Resource_51wgh"), SubResource("Resource_h5ulb"), SubResource("Resource_a3bgl"), SubResource("Resource_f8dqu"), SubResource("Resource_sovr6"), SubResource("Resource_sg16c"), SubResource("Resource_25dh5"), SubResource("Resource_youtu"), SubResource("Resource_stx51"), SubResource("Resource_xd74t"), SubResource("Resource_hynxo"), SubResource("Resource_vs5eg"), SubResource("Resource_nxq7q"), SubResource("Resource_jal35")])
+
+[node name="TrainSpawningPlatform4" parent="." instance=ExtResource("10_m752v")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.5463, 0.0336895, 27.9231)
+spawn_queue = Array[ExtResource("11_e2jj7")]([SubResource("Resource_43jkh"), SubResource("Resource_nlwr2"), SubResource("Resource_gf6tb"), SubResource("Resource_dq5dy"), SubResource("Resource_omgmr"), SubResource("Resource_pcvxc"), SubResource("Resource_xsd54"), SubResource("Resource_tqi56"), SubResource("Resource_xbt2i"), SubResource("Resource_2gqay"), SubResource("Resource_fuejw"), SubResource("Resource_vpkpo"), SubResource("Resource_pus80"), SubResource("Resource_mmnmv"), SubResource("Resource_opfx5"), SubResource("Resource_7fbb8")])

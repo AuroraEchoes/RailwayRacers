@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://r4qlr2m1wr4r"]
+
+[ext_resource type="Script" path="res://scripts/Train.gd" id="1_03mat"]
+[ext_resource type="AudioStream" uid="uid://dag143wnqs25" path="res://assets/sound/money-get.mp3" id="2_klo8r"]
+[ext_resource type="Script" path="res://scripts/ModeratedAudioPlayer3D.gd" id="3_rvy8o"]
+[ext_resource type="AudioStream" uid="uid://dsgpuf1xfywld" path="res://assets/sound/train-whistle.mp3" id="4_lviqr"]
+[ext_resource type="AudioStream" uid="uid://dynr6etgk88kn" path="res://assets/sound/train-sounds.mp3" id="5_d1q3u"]
+
+[sub_resource type="Curve3D" id="Curve3D_6mu0a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pf5g"]
+size = Vector3(1, 1, 1.9)
+
+[node name="Train" type="Path3D"]
+curve = SubResource("Curve3D_6mu0a")
+script = ExtResource("1_03mat")
+
+[node name="Locomotive" type="PathFollow3D" parent="."]
+loop = false
+
+[node name="ClickBox" type="Area3D" parent="Locomotive"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Locomotive/ClickBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.0499999)
+shape = SubResource("BoxShape3D_3pf5g")
+
+[node name="GetMoneyAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_klo8r")
+script = ExtResource("3_rvy8o")
+
+[node name="TrainSpawnAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_lviqr")
+script = ExtResource("3_rvy8o")
+relative_volume = 0.67
+
+[node name="TrainRunningAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_d1q3u")
+script = ExtResource("3_rvy8o")
+relative_volume = 0.87
