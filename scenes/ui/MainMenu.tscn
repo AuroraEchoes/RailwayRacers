@@ -46,8 +46,6 @@ stretch_mode = 4
 
 [node name="MenuButtons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 alignment = 1
 
 [node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer/MenuButtons"]

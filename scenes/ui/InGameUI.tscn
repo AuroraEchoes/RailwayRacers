@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://y2cuqictrejx"]
+[gd_scene load_steps=5 format=3 uid="uid://y2cuqictrejx"]
 
 [ext_resource type="Script" path="res://scripts/UIManager.gd" id="1_usllc"]
+[ext_resource type="Texture2D" uid="uid://bt2q5aif4o8wq" path="res://assets/clock.png" id="2_wwt3b"]
+[ext_resource type="Texture2D" uid="uid://bgbs7gmvnvlwa" path="res://assets/money.png" id="3_iqvml"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bg8n"]
 bg_color = Color(0, 0, 0, 0.286275)
@@ -32,14 +34,29 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3bg8n")
 
-[node name="TimeRemaining" type="Label" parent="MarginContainer/TimeRemainingContainer"]
+[node name="TimeRemainingTimer" type="Timer" parent="MarginContainer/TimeRemainingContainer"]
+one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TimeRemainingContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TimeRemainingContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TimeRemainingContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_wwt3b")
+expand_mode = 3
+
+[node name="TimeRemaining" type="Label" parent="MarginContainer/TimeRemainingContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
-text = "🕑 0:00 "
-
-[node name="TimeRemainingTimer" type="Timer" parent="MarginContainer/TimeRemainingContainer"]
-one_shot = true
+text = "0:00 "
 
 [node name="ScoreContainer" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -47,11 +64,26 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3bg8n")
 
-[node name="Score" type="Label" parent="MarginContainer/ScoreContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScoreContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScoreContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScoreContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_iqvml")
+expand_mode = 3
+
+[node name="Score" type="Label" parent="MarginContainer/ScoreContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
-text = "💲 0 "
+text = "0"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2

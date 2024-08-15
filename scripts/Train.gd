@@ -221,6 +221,7 @@ func go_to(location: Vector3i):
 	var points: Array[Vector3] = grid.find_path_but_dont_let_the_stupid_fucking_train_do_a_180_and_combust(locomotive.global_position, get_carriage_tile_pos(), location)
 	# ...which is what THIS is doing
 	var prepoints_lets_get_to_the_start_line = grid.points_of_path(back_point, grid.local_to_map(locomotive.global_position))
+	prepoints_lets_get_to_the_start_line.pop_back()
 	points = prepoints_lets_get_to_the_start_line + points
 	# print(prepoints_lets_get_to_the_start_line, points)
 	if len(points) > 0:

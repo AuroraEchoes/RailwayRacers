@@ -19,11 +19,11 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.is_action("zoom_in"):
+		if event.is_action("zoom_in") or Input.is_action_just_released("ui_text_scroll_down.macos"):
 			self._zoom(-10.0)
-		elif event.is_action("zoom_out"):
+		elif event.is_action("zoom_out") or Input.is_action_just_pressed("ui_text_scroll_up.macos"):
 			self._zoom(10.0)
-		
+
 func _zoom(factor: float):
 	var rotation_percent: float = abs(self.rotation_degrees.x) / 90.
 	# Is this the good way? No

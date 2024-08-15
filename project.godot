@@ -29,6 +29,7 @@ Global="*res://scripts/Global.gd"
 
 [display]
 
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [dotnet]
@@ -86,3 +87,8 @@ pause={
 
 3d_physics/layer_2="TrainCollision"
 3d_physics/layer_4="MouseGridCollision"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

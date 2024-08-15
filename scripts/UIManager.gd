@@ -1,9 +1,9 @@
 extends CanvasLayer
 class_name UIManager
 
-@onready var time_remaining_label: Label = $MarginContainer/TimeRemainingContainer/TimeRemaining
+@onready var time_remaining_label: Label = $MarginContainer/TimeRemainingContainer/MarginContainer/HBoxContainer/TimeRemaining
 @onready var time_remaining_timer: Timer = $MarginContainer/TimeRemainingContainer/TimeRemainingTimer
-@onready var score_label: Label = $MarginContainer/ScoreContainer/Score
+@onready var score_label: Label = $MarginContainer/ScoreContainer/MarginContainer/HBoxContainer/Score
 @onready var time_up_panel: PanelContainer = $MarginContainer/TimeUpPanel
 @onready var level_lbl: Label = $MarginContainer/TimeUpPanel/MarginContainer/VBoxContainer/LevelNumber
 @onready var score_lbl: Label = $MarginContainer/TimeUpPanel/MarginContainer/VBoxContainer/Score
@@ -87,8 +87,8 @@ func _format_time(time_remaining: float) -> String:
 	var secs_str: String = str(secs)
 	if secs < 10:
 		secs_str = "0" + secs_str
-	return "🕑 %s:%s " % [str(mins), secs_str]
+	return "%s:%s " % [str(mins), secs_str]
 
 func add_score(additional_score: float):
 	score += additional_score
-	score_label.text = "💲 " + str(int(score)) + " "
+	score_label.text = str(int(score)) + " "
